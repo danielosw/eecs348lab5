@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 void dataprint(float data[12]){
 printf("Monthly Sales report for 2024\n");
 float hold[12];
@@ -64,8 +65,31 @@ for (int i = 0; i < 12; i++)
 }
 int main(int argc, char *argv[])
 {
+	char str[1000];
+	
+	FILE* file_ptr = fopen("./input.txt", "r");
+	while(fgets(str, 1000, file_ptr) != NULL)
+  {
+    puts(str);
+  }
+  fclose(file_ptr);
+  float data[12];
+  int index = 0;
+  int prev = 0;
+  for (int i = 0; i < (sizeof(str) / sizeof(str[0])); i++) {
+  if(str[i] == '\n'){
+	data[index] = strtof(&str[prev-i], NULL); 
+	index++;
+	prev = i;
+  }
+  else if (str[i] == '\r') {
+  data[index] = strtof(&str[prev-i], NULL); 
+	index++;
+	i++;
+	prev = i;
+  }
+  }
     // Hardcoded for testing
-    float data[12] = {23458.01,40112.00,56011.85,37820.88,37904.67,60200.22,72400.31,56210.89,67230.84,68233.12,80950.34,95225.22};
     dataprint(data);
     return 1;
 }

@@ -65,29 +65,21 @@ for (int i = 0; i < 12; i++)
 }
 int main(int argc, char *argv[])
 {
-	char str[1000];
+	char str[12][10000];
 	
 	FILE* file_ptr = fopen("./input.txt", "r");
-	while(fgets(str, 1000, file_ptr) != NULL)
+	int i = 0;
+	while(fgets(str[i], sizeof(str[i]), file_ptr))
   {
-    puts(str);
+    puts(str[i]);
+	i++;
   }
   fclose(file_ptr);
   float data[12];
   int index = 0;
-  int prev = 0;
   for (int i = 0; i < (sizeof(str) / sizeof(str[0])); i++) {
-  if(str[i] == '\n'){
-	data[index] = strtof(&str[prev-i], NULL); 
+	data[index] = strtof(str[i], NULL); 
 	index++;
-	prev = i;
-  }
-  else if (str[i] == '\r') {
-  data[index] = strtof(&str[prev-i], NULL); 
-	index++;
-	i++;
-	prev = i;
-  }
   }
     // Hardcoded for testing
     dataprint(data);

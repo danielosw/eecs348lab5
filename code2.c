@@ -59,14 +59,20 @@ int main(int argc, char *argv[])
         {5,4,3,2,1}
     };
     int m3[SIZE][SIZE];
+    printf("Original matrix 1:\n");
     printMatrix(m1);
     printf("\n");
+    printf("Original matrix 2:\n");
+    printMatrix(m2);
+    printf("\nm1+m2:\n");
     addMatrices(m1,m2,m3);
     printMatrix(m3);
     printf("\n");
+    printf("m1 transposed:\n");
     transposeMatrix(m1,m3);
     printMatrix(m3);
     printf("\n");
+    printf("m1*m1:\n");
     multiplyMatrix(m1,m2,m3);
     printMatrix(m3);
     
